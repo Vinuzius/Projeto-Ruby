@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     Rigidbody2D rigidbody2D;
     float timer = 0.0F;
     int direction = 1;
+    bool broken;
     Animator animator;
     void Start()
     {
@@ -26,6 +27,9 @@ public class EnemyController : MonoBehaviour
             direction = -direction;
             timer = changeTime;
         }
+
+        if(!broken)
+        {   return;}
 
     }
 
@@ -46,8 +50,12 @@ public class EnemyController : MonoBehaviour
             animator.SetFloat("Move X",direction);
             animator.SetFloat("Move Y",0);
         }
-
         rigidbody2D.MovePosition(position);
+
+        if(!broken)
+        {
+            return;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -59,5 +67,11 @@ public class EnemyController : MonoBehaviour
             player.ChangeHealth(-1);
         }
         
+    }
+    // ====================== //
+    public void Fix()
+    {
+        broken = false;
+        rigidbody2D.simulated = false;
     }
 }
