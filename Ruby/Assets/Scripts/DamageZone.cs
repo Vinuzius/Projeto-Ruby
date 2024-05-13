@@ -11,11 +11,6 @@ public class DamageZone : MonoBehaviour
         {
             controller.ChangeHealth(-1);
         }
-
-        if (controller.health < 1)
-        {
-            Debug.Log("You're dead bro. ");
-        }
         
     }
 }
